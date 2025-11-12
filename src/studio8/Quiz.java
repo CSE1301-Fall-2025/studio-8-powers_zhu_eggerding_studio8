@@ -5,17 +5,21 @@ import java.util.Scanner;
 import support.cse131.NotYetImplementedException;
 
 public class Quiz {
-	
+
 	/**
 	 * Constructor
+	 * 
 	 * @param questions
 	 */
+	private Question[] questions;
+
 	public Quiz(Question[] questions) {
-		throw new NotYetImplementedException();
+		this.questions = questions;
 	}
-	
+
 	/**
 	 * Prompts the user to answer, then returns a String containing their answer.
+	 * 
 	 * @param in
 	 * @return String answer
 	 */
@@ -24,27 +28,38 @@ public class Quiz {
 		String out = in.next();
 		return out;
 	}
-	
+
 	/**
 	 * Gets the number of points possible in the quiz.
+	 * 
 	 * @return int number of total points
 	 */
 	public int getTotalPoints() {
-		throw new NotYetImplementedException();
+		int sum = 0;
+		for (int i = 0; i < questions.length; i++) {
+			sum += questions[i].getPoints();
+		}
+		return sum;
 	}
-	
+
 	/**
-	 * Asks the user all question in the quiz, then prints out 
+	 * Asks the user all question in the quiz, then prints out
 	 * the amount of points the user earned. This print statement
 	 * should include "You earned ____ points"
 	 * 
 	 * @param in Scanner object to feed into getUserAnswer
 	 */
 	public void takeQuiz(Scanner in) {
-		throw new NotYetImplementedException();
+		int totalPoints;
+		for (int i = 0; i < questions.length; i++) {
+			questions[i].displayPrompt();
+			String answer = getUserAnswer(in);
+			questions[i].checkAnswer(answer);
+			totalPoints = getTotalPoints();
+		}
+		System.out.println("You earned" + totalPoints + "points");
 	}
-	
-	
+
 	public static void main(String[] args) {
 		// TODO: Make your own Quiz!
 	}
